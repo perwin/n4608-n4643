@@ -2,11 +2,13 @@
 
 This git repository contains data files, Python code, and Python Jupyter
 notebooks which can be used to reproduce figures and analyses from the
-paper ["What Determines the Sizes of Bars in Spiral
-Galaxies?"](https://www.mpe.mpg.de/~erwin/temp/s4g_barsizes.pdf) (Erwin
-2020, *Monthly Notices of the Royal Astronomical Society*, **489:** 3553;
-[arXiv:1908.08423](https://arxiv.org/abs/1908.08423)).
+paper ["Composite Bulges -- II. Classical Bulges and Nuclear Disks in
+Barred Galaxies: The Contrasting Cases of NGC 4608 and NGC
+4643"](https://www.mpe.mpg.de/~erwin/temp/s4g_barsizes.pdf) (Erwin et
+al. 2020, *Monthly Notices of the Royal Astronomical Society*,
+submitted).
 
+**NOTE: THIS IS CURRENTLY AN INCOMPLPETE WORK IN PROGRESS!**
 
 ![Bar sizes](./barsizes_display.png)
 
