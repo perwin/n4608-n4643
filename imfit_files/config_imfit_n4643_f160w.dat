@@ -1,4 +1,7 @@
 # Imfit config file for fitting WFC3-IR F160W image of NGC 4643
+#
+# Fit command:
+# imfit -c config_imfit_n4643_f160w.dat n4643_f160w.fits[100:2260,100:1970] --mask=n4643_f160w_mask.fits[100:2260,100:1970] --psf=psf_f160w.fits
 
 X0		1273.8
 Y0		1109.8

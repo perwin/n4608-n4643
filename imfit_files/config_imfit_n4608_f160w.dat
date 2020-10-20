@@ -1,5 +1,8 @@
 # Imfit config file for fitting HST-WFC3-IR F160W image of NGC 4608
 # Outer disk parameters (except I_0) fixed to to IRAC1 fit results
+#
+# Fit command:
+# imfit -c config_imfit_n4608_f160w.dat n4608_f160w.fits[100:2200,50:2000] --mask=n4608_f160w_mask.fits[100:2200,50:2000] --psf=psf_f160w.fits
 
 X0		1274
 Y0		1119.6
