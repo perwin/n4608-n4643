@@ -1,0 +1,49 @@
+# Imfit config file for fitting HST-WFC3-IR F160W image of NGC 4608
+# Outer disk parameters (except I_0) fixed to to IRAC1 fit results
+
+X0		1274
+Y0		1119.6
+FUNCTION Gaussian
+PA		0		fixed
+ell		0.0		fixed
+A		1.9e5	100,1e6
+sigma	1.1		0.1,30
+FUNCTION Sersic
+PA		106		0,180
+ell		0.05	0.01,0.3
+n		2.0		0.1,5
+I_e		5e4		1e3,1e5
+r_e		55		3,100
+FUNCTION Sersic_GenEllipse
+PA		52		20,70
+ell		0.1		0.01,0.5
+c0		0.1		-1,1
+n		1.0		0.2,2
+I_e		2.0e3		1e2,1e5
+r_e		175		10,500
+FUNCTION FlatBar
+PA				45		20,70
+ell				0.87	0.5,0.97
+deltaPA_max		40		1,50
+I_0				1.2e3	500,2e4
+h1				800		400,2e3
+h2				 60		10,200
+r_break			680		500,900
+alpha			 0.03	0.005,10
+FUNCTION GaussianRingAz
+PA				125		0,180
+ell				0.08	0,0.4
+A_maj			40		0,300
+A_min			80		0,300
+R_ring			800		700,1200
+sigma_r		    105		20,500
+FUNCTION BrokenExponential
+PA				124.93	fixed
+ell				0.1267	fixed
+I_0				120		10,500
+h1				1e5		fixed
+h2				449.86	fixed
+r_break			1162.89	fixed
+alpha			0.02	fixed
+FUNCTION FlatSky
+I_0				145		0,200

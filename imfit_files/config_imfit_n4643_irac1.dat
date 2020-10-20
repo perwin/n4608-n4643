@@ -1,0 +1,44 @@
+# Imfit config file for fitting Spitzer IRAC1 image of NGC 4643
+# n4643irac1ss_adu.fits -- converted to ADU/pix.
+
+GAIN	3.7
+READNOISE	7.8
+ORIGINAL_SKY	315.538592
+
+X0		446.2
+Y0		780.9
+FUNCTION Exponential
+PA		40		35,60
+ell		0.17	0.01,0.5
+I_0		4.0e5	5e4,1e6
+h		2.0		0.5,10
+FUNCTION GaussianRing
+PA		48		35,60
+ell		0.2		0.05,0.4
+A		1e4		100,7e4
+R_ring	3.0		1,8
+sigma	2		0.1,5
+FUNCTION Sersic
+PA		122		50,160
+ell		0.13	0.01,0.5
+n		0.9		0.1,2.5
+I_e		1e4		1e3,5e5
+r_e		5		2,30
+FUNCTION GenFlatBar
+PA				133		100,160
+ell				0.81	0.5,0.95
+c0				-0.5	-1,1
+deltaPA_max		25		1,50
+I_0				1e4		100,3e4
+h1				50		40,200
+h2				 7		1,20
+r_break			61		50,80
+alpha			 1		0.1,10
+FUNCTION BrokenExponential
+PA		58		-10,190
+ell		0.2		0.0,0.4
+I_0				1200		100,5e3
+h1				110		40,200
+h2				15		1,50
+r_break			141		100,180
+alpha			 1		0.1,10

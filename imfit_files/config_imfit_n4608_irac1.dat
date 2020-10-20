@@ -1,0 +1,44 @@
+# Imfit config file for fitting Spitzer IRAC1 image of NGC 4608
+# n4608irac1ss_adu.fits -- converted to ADU/pix.
+
+GAIN	3.7
+READNOISE	7.8
+ORIGINAL_SKY	18.201852
+
+X0		1113.6
+Y0		449.2
+FUNCTION Sersic
+PA		90		0,180
+ell		0.1		0.01,0.3
+n		1.7		0.1,5
+I_e		1e3		100,5e4
+r_e		5		0.5,10
+FUNCTION Exponential
+PA		87		70,120
+ell		0.2		0.01,0.5
+I_0		3e3		100,5e4
+h		10		3,50
+FUNCTION FlatBar
+PA				87		70,100
+ell				0.88	0.5,0.95
+deltaPA_max		35		1,50
+I_0				300		100,2e4
+h1				85		40,200
+h2				 5		1,20
+r_break			70		50,90
+alpha			 0.5		0.1,10
+FUNCTION GaussianRingAz
+PA				160		120,180
+ell				0.1		0,0.4
+A_maj			10		1,50
+A_min			20		1,50
+R_ring			80		75,125
+sigma_r		    10		2,50
+FUNCTION BrokenExponential
+PA				170
+ell				0.2		0.1,0.4
+I_0				30		1,100
+h1				500		20,1e5
+h2				40		10,1000
+r_break			100		50,150
+alpha			0.5		0.1,10
