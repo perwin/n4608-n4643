@@ -1,5 +1,8 @@
 # Imfit config file for fitting Spitzer IRAC1 image of NGC 4643
 # n4643irac1ss_adu.fits -- converted to ADU/pix.
+#
+# Fit command:
+# imfit -c config_imfit_n4643_irac1.dat n4643irac1ss_adu.fits[200:700,550:1030] --mask=n4643irac1_mask.fits[200:700,550:1030] --psf=psf_irac1_0.75arcsec_51.fits
 
 GAIN	3.7
 READNOISE	7.8

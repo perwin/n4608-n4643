@@ -1,5 +1,8 @@
 # Imfit config file for fitting Spitzer IRAC1 image of NGC 4608
 # n4608irac1ss_adu.fits -- converted to ADU/pix.
+#
+# Fit command:
+# imfit -c config_imfit_n4608_irac1.dat n4608irac1ss_adu.fits[970:1260,280:610] --mask=n4608irac1_mask.fits[970:1260,280:610] --psf=psf_irac1_0.6arcsec_51.fits
 
 GAIN	3.7
 READNOISE	7.8
