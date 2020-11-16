@@ -1,0 +1,58 @@
+# Best-fit model results for imfit 1.7.1 (OpenMP-enabled)
+# Generated on Tue Nov 26 13:26:08 2019 by the following command:
+#    imfit_extrafuncs -c config_imfit_9c.dat f160w_extracted.fits[100:2200,50:2000] --mask=mask_final.fits[100:2200,50:2000] --save-model=model9c+psf.fits --save-residual=resid9c+psf.fits --psf=psf_f160w_grizli_extracted.fits --save-params=bestfit_params_9c.dat --bootstrap=50 --save-bootstrap=bootstrap_9c.dat
+
+# Results of fit:
+#   Algorithm: Levenberg-Marquardt: status = 1 -- SUCCESS: Convergence in fit-statistic value.
+#   Fit statistic: chi-squared (data-based errors)
+#   Best-fit value: 8714257.204380
+#   Reduced value: 2.160172
+#   AIC: 8714319.204872
+#   BIC: 8714728.723396
+
+X0		1274.2104 # +/- 0.0019
+Y0		1119.6456 # +/- 0.0019
+FUNCTION Gaussian
+PA		      0 # +/- 0
+ell		      0 # +/- 0
+I_0		 204594 # +/- 3198.8
+sigma		0.959473 # +/- 0.0093489
+FUNCTION Sersic
+PA		101.245 # +/- 0.23316
+ell		0.0358651 # +/- 0.00023114
+n		2.21398 # +/- 0.0065505
+I_e		4117.38 # +/- 30.82
+r_e		61.2073 # +/- 0.43055
+FUNCTION Sersic_GenEllipse
+PA		51.3684 # +/- 0.032636
+ell		0.112932 # +/- 0.00037957
+c0		0.0994051 # +/- 0.00087629
+n		0.960108 # +/- 0.0013033
+I_e		1909.65 # +/- 7.0825
+r_e		172.371 # +/- 0.1141
+FUNCTION FlatBar
+PA		44.8909 # +/- 0.0024783
+ell		0.870785 # +/- 0.00024334
+deltaPA_max		40.0028 # +/- 0.069885
+I_0		1224.31 # +/- 1.6701
+h1		772.264 # +/- 1.7418
+h2		 62.519 # +/- 0.11423
+r_break		677.906 # +/- 0.17625
+alpha		0.0298753 # +/- 0.0001119
+FUNCTION GaussianRingAz
+PA		124.567 # +/- 0.038013
+ell		0.0849997 # +/- 0.00026024
+A_maj		35.7583 # +/- 0.046285
+A_min		80.6565 # +/- 0.076651
+R_ring		799.757 # +/- 0.12549
+sigma_r		106.089 # +/- 0.089644
+FUNCTION BrokenExponential
+PA		 124.93 # +/- 0
+ell		 0.1267 # +/- 0
+I_0		118.527 # +/- 0.098066
+h1		 100000 # +/- 0
+h2		 449.86 # +/- 0
+r_break		1162.89 # +/- 0
+alpha		   0.02 # +/- 0
+FUNCTION FlatSky
+I_sky		146.843 # +/- 0.077908

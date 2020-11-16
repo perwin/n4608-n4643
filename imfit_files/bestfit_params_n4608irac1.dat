@@ -1,0 +1,25 @@
+# Best-fit model results for imfit 1.7.1 (OpenMP-enabled)
+# Generated on Thu Jan  9 17:19:01 2020 by the following command:
+#    imfit -c config_imfit_5b.dat n4608irac1ss_adu.fits[970:1260,280:610] --mask=mainmask.fits[970:1260,280:610] --save-model=model5b.fits --save-residual=resid5b.fits --psf=psf_irac1_0.6arcsec_51.fits
+
+# Results of fit:
+#   Algorithm: Levenberg-Marquardt: status = 1 -- SUCCESS: Convergence in fit-statistic value.
+#   Fit statistic: chi-squared (data-based errors)
+#   Best-fit value: 468658.356248
+#   Reduced value: 5.233249
+#   AIC: 468680.359196
+#   BIC: 468783.786167
+
+X0		1113.5512 # +/- 0.0043
+Y0		449.2371 # +/- 0.0032
+FUNCTION Sersic
+PA		88.0592 # +/- 0.037487
+ell		0.381129 # +/- 0.00044514
+n		2.40687 # +/- 0.0049383
+I_e		468.334 # +/- 1.7395
+r_e		23.8228 # +/- 0.051995
+FUNCTION Exponential
+PA		172.257 # +/- 0.2236
+ell		0.208511 # +/- 0.0026377
+I_0		61.7054 # +/- 0.35009
+h		 99.836 # +/- 0.46123
