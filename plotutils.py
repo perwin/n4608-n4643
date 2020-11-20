@@ -489,7 +489,7 @@ def PlotImage( imageData, xc=0, yc=0, width=None, height=None, zrange=None, cmap
         imData = np.log10(imData)
 
     # determine xPos,yPos and extract centered subimage, if requested
-    (imData, xPos, yPos) = ExtractCenteredSubimage(imData, xc, yc, pix, width, height, verbose=True)
+    (imData, xPos, yPos) = ExtractCenteredSubimage(imData, xc, yc, pix, width, height, verbose=False)
 
     # define x-axis and y-axis ranges for labeling purposes
     xtent = np.array([xPos[0], xPos[-1], yPos[0], yPos[-1]])
