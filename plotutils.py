@@ -1,9 +1,12 @@
 # Plotting-related code
 
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib.patches import Ellipse
+from skimage.measure import profile_line
 
 
 
@@ -554,3 +557,180 @@ def PlotImage( imageData, xc=0, yc=0, width=None, height=None, zrange=None, cmap
             plt.sca(axesObj)  # Activate main plot before returning
 
     return axesImg
+
+
+
+def DrawPALine( PA, radius, fmt='g-', color=None, linewidth=1.0, xc=0.0, yc=0.0,
+                addDots=False, dot_ms=6, alpha=1.0, axesObj=None ):
+    """Given a pre-existing plot, draws a line passing through the central
+    coordinates (by default, center = 0,0 in data coordinates) at PA = PA
+    relative to *+y axis*, with radius = radius.
+
+        PA = position angle CCW from +y axis
+        radius = radial length of line (data units)
+        fmt = matplotlib format string for line
+        color = optional color specification
+        linewidth = matplotlib linewidth specification
+        xc, yc = coordinates for center of line (data units)
+        addDots = if True, small circles are drawn at either end of the line
+        dot_ms = markersize value for dots (if addDots is True)
+        axesObj = optional matplotlib.axes object, specifying which axes gets
+            the ellipse drawn into it
+    """
+
+    if (PA < 0) or (PA > 180):
+        print("PA must lie between 0 and 180 degrees!")
+        return None
+    PA_x = -PA
+    dx = radius * math.sin(math.radians(PA_x))
+    dy = radius * math.cos(math.radians(PA_x))
+    vertical = False
+    if (dx == 0.0):
+        vertical = True
+    else:
+        slope = dy/dx
+    xx = [xc + dx, xc - dx]
+    yy = [yc + dy, yc - dy]
+
+    if axesObj is None:
+        ax = plt.gca()
+    else:
+        ax = axesObj
+    
+    if color is None:
+        color = fmt[0]
+    linestyle = fmt[1]
+    if vertical:
+        axvline(xc, color=color, linestyle=linestyle, linewidth=linewidth, alpha=alpha)
+    else:
+        ax.axline((xc,yc), slope=slope, color=color, linestyle=linestyle, linewidth=linewidth, alpha=alpha)
+    if addDots is True:
+        ax.plot(xx,yy, color + "o", ms=dot_ms, alpha=alpha)
+
+
+def DrawEllipse( PA, a, ell, edgecolor='g', linestyle='-', linewidth=1.0, fillColor=None,
+                alpha=1.0, xc=0.0, yc=0.0, axesObj=None ):
+    """Given a pre-existing plot, draws an ellipse with semi-major axis a and
+    ellipticity ell, with major axis at PA = PA relative to +y-axis,
+    centered on coordinates (xc,yc) (by default, = 0,0 in data coordinates).
+
+        PA = position angle CCW from +y axis
+        a = semi-major axis of ellipse (data units)
+        ell = ellipticity (1 - b/a) of ellipse
+        edgecolor = color for ellipse outline
+        linestyle, linewidth = matplotlib specification for ellipse outline
+        fillColor = if not None, then the ellipse is filled using the
+            specified color
+        fmt = matplotlib format string for line
+        color = optional color specification
+        linewidth = matplotlib linewidth specification
+        xc, yc = coordinates for center of line (data units)
+        xc, yc = coordinates for center of ellipse (data units)
+        axesObj = optional matplotlib.axes object, specifying which axes gets
+            the ellipse drawn into it
+    """
+
+    if axesObj is None:
+        ax = plt.gca()
+    else:
+        ax = axesObj
+    b = (1 - ell)*a
+    if fillColor is None:
+        faceColor = 'None'
+    else:
+        faceColor = fillColoir
+    ellPatch = Ellipse((xc,yc), 2*b, 2*a, angle=PA, facecolor=faceColor, edgecolor=edgecolor,
+                        linestyle=linestyle, linewidth=linewidth, alpha=alpha)
+    ax.add_patch(ellPatch)
+
+
+
+def ExtractProfile( imdata, x0,y0, x1,y1, width=1 ):
+    """
+    This uses skimage.measure.profile_line to extract a profile from pixel
+    coordinate (x0,y0) to pixel coordinate (x1,y1)
+    
+    This function uses IRAF coordinates (1-based, x = column number)
+    
+    Parameters
+    ----------
+    imdata : 2D ndarray of float
+        image data array
+
+    x0 : int or float
+        x-coordinate of start position (1-based)
+
+    y0 : int or float
+        y-coordinate of start position (1-based)
+
+    x1 : int or float
+        x-coordinate of end position (1-based)
+
+    y1 : int or float
+        y-coordinate of end position (1-based)
+    
+    width : int, optional
+        width of profile (perpendicular to profile) in pixels
+
+    Returns
+    -------
+    (rr, ii) : tuple of 1D ndarray of float
+        rr = radius vector (r = 0 at start position)
+        ii = intensity vector
+    """
+
+    # switch x,y to numpy's y,x and switch to 0-based counting
+    try:
+        ii = profile_line(imdata, (y0 - 1, x0 - 1), (y1 - 1, x1 - 1), linewidth=width, 
+                        reduce_func=np.nanmean)
+    except RuntimeWarning:
+        # we don't care whether all the values in a bin were NaN
+        pass
+    npts = len(ii)
+    rr = np.linspace(0, npts - 1, npts)
+    return rr,ii
+
+
+def GetProfileAtAngle( imdata, xc,yc, angle, radius, width=1 ):
+    """
+    Returns a 1D profile cut through an image at specified angle, extending to
+    specified radius.
+    Note: this is designed to imitate pvect, so angles are measured CCW from +x axis!
+    
+    This function uses IRAF coordinates (1-based, x = column number)
+
+    Parameters
+    ----------
+    imdata : 2D ndarray of float
+        image data array
+    
+    xc : int or float
+        x-coordinate of center to extract profile from (IRAF ordering, 1-based)
+    
+    yc : int or float
+        y-coordinate of center to extract profile from (IRAF ordering, 1-based)
+    
+    angle : float
+        angle measured CCW from +x axis, in degrees
+    
+    radius : int
+        length of profile, in pixels
+    
+    width : int, optional
+        width of profile (perpendicular to profile) in pixels
+    
+    Returns
+    -------
+    rr,ii : tuple of 1D ndarray of float
+        rr = array of radius values (= 0 at (xc,yc))
+        ii = data pixel values along profile [= Nan if all pixels for that bin
+                were masked]
+    """
+    angle_rad = math.radians(angle)
+    x_end = xc + math.cos(angle_rad) * radius
+    y_end = yc + math.sin(angle_rad) * radius
+    x_start = xc - math.cos(angle_rad) * radius
+    y_start = yc - math.sin(angle_rad) * radius
+    rr,ii = ExtractProfile(imdata, x_start,y_start, x_end,y_end, width=width)
+    rr = rr - radius
+    return rr, ii
